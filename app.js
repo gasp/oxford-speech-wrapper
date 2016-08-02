@@ -5,10 +5,17 @@ const https = require('https');
 const fs = require('fs');
 const querystring = require('querystring');
 const config = require('./config.json');
+const guid = require('guid');
 
+var context = {
+  instanceid: guid.raw(),
+  appid: '6e4c33c9-54b6-3873-cab8-7a972ea7d77c',
 
-// token
-
+  // token is available a certain time.
+  // authentification answer specifies a "expires_in":"600",
+  token_current: null,
+  token_expires_at: null
+};
 
 // Authenticate the API call
 function authenticate(credentials, cb) {
@@ -51,6 +58,10 @@ function authenticate(credentials, cb) {
   post_req.end();
 }
 
+function isAuthenticated() {
+  return false;
+}
+
 function recognize(credentials, waveBin, cb) {
   if (typeof credentials.access_token !== 'string') {
     throw 'recognize: no token given';
@@ -58,14 +69,16 @@ function recognize(credentials, waveBin, cb) {
 
   var post_params = {
     'version': '3.0',
-    'requestid': 'b2c95ede-97eb-4c88-81e4-80f32d6aee54',
-    'appID': 'f84e364c-ec34-4773-a783-73707bd9a585',
-    'instanceid': '1d4b6030-9099-11e0-91e4-0800200c9a66',
+    'requestid': guid.raw(), // changes each call
+    'instanceid': context.instanceid, // changes at each instance
+    'appID': context.appid, // never changes
     'format': 'json',
     'locale': 'en-US',
     'device.os': 'Linux',
     'scenarios': 'ulm'
   };
+
+
   // querystring.stringify(
   // console.log('posting on /recognize' + '?' + querystring.stringify(post_params));
 
@@ -88,6 +101,7 @@ function recognize(credentials, waveBin, cb) {
       //console.log(chunk);
     });
     res.on('end', () => {
+      console.log(chunks);
       var error, result;
       try {
         result = JSON.parse(chunks); //.results[0];
@@ -111,7 +125,8 @@ authenticate(null, (err, access_token) => {
   //console.log(access_token);
   var wav = fs.readFileSync('./weekend.wav');
   recognize({access_token: access_token}, wav, (error, data) => {
-    console.log(data.results[0].name);
+    //console.log(data.results[0].name);
+    console.log(data);
   });
 });
 /*
