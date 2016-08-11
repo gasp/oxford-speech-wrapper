@@ -2,6 +2,13 @@
   "name": "oxford-speech-wrapper",
   "version": "1.0.0",
   "description": "simple bing voice recognition wrapper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gasp/oxford-speech-wrapper"
+  },
+  "bugs": {
+    "url": "https://github.com/gasp/oxford-speech-wrapper/issues"
+  },
   "main": "app.js",
   "scripts": {
     "test": "node tests/weekend.js"
