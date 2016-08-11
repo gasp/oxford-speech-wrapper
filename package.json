@@ -1,15 +1,22 @@
 {
-  "name": "bing_voice_recognition",
+  "name": "oxford-speech-wrapper",
   "version": "1.0.0",
   "description": "simple bing voice recognition wrapper",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tests/weekend.js"
   },
   "author": "gaspard beernaert",
   "engines" : {
     "node" : ">4.4.5"
   },
+  "keywords" : [
+    "project oxford",
+    "speech",
+    "transcription",
+    "bing",
+    "microsoft"
+  ],
   "license": "ISC",
   "dependencies": {
     "guid": "0.0.12"

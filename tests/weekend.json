@@ -1,0 +1,24 @@
+{
+  "version":"3.0",
+  "header":{
+    "status":"success",
+    "scenario":"ulm",
+    "name":"well I met with my sister and her kids and my parents in a second guess we do for the last day for the last 8 years my grandparents there before and my parents met them before and now we maintain a neutral is in love with this <profanity>shit</profanity>",
+    "lexical":"well i met with my sister and her kids and my parents in a second guess we do for the last day for the last eight years my grandparents there before and my parents met them before and now we maintain a neutral is in love with this <profanity>shit</profanity>",
+    "properties":{
+      "requestid":"75b639b1-a6f7-4857-b7f1-51ea081073a5",
+      "HIGHCONF":"1"
+    }
+  },
+  "results":[
+    {
+      "scenario":"ulm",
+      "name":"well I met with my sister and her kids and my parents in a second guess we do for the last day for the last 8 years my grandparents there before and my parents met them before and now we maintain a neutral is in love with this <profanity>shit</profanity>",
+      "lexical":"well i met with my sister and her kids and my parents in a second guess we do for the last day for the last eight years my grandparents there before and my parents met them before and now we maintain a neutral is in love with this <profanity>shit</profanity>",
+      "confidence":"0.824535",
+      "properties":{
+        "HIGHCONF":"1"
+      }
+    }
+  ]
+}

@@ -2,7 +2,6 @@
 
 'use strict';
 const https = require('https');
-const fs = require('fs');
 const querystring = require('querystring');
 const config = require('./config.json');
 const guid = require('guid');
@@ -25,6 +24,11 @@ function authenticate(credentials, cb) {
     'client_secret': config.credentials.client_secret,
     'scope': 'https://speech.platform.bing.com'
   };
+  if ('client_id' in credentials && typeof credentials.client_id === 'string') {
+    post_data.client_id = credentials.client_id;
+    post_data.client_secret = credentials.client_secret;
+  }
+
 
   var post_options = {
     method: 'POST',
@@ -98,10 +102,8 @@ function recognize(credentials, waveBin, cb) {
     res.setEncoding('utf8');
     res.on('data', (chunk) => {
       chunks += chunk;
-      //console.log(chunk);
     });
     res.on('end', () => {
-      console.log(chunks);
       var error, result;
       try {
         result = JSON.parse(chunks); //.results[0];
@@ -118,20 +120,7 @@ function recognize(credentials, waveBin, cb) {
   post_req.end();
 }
 
-
-
-authenticate(null, (err, access_token) => {
-  if(err) throw err;
-  //console.log(access_token);
-  var wav = fs.readFileSync('./weekend.wav');
-  recognize({access_token: access_token}, wav, (error, data) => {
-    //console.log(data.results[0].name);
-    console.log(data);
-  });
-});
-/*
 module.exports = {
   authenticate: authenticate,
   recognize: recognize
 };
-*/
